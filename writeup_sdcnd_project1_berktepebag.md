@@ -37,3 +37,24 @@ Although pipeline seems to work fine with example images and videos, at challeng
 ### 3. Things to do to fix pipeline
 
 Challenge video can be much better than this.. And my code is bit hard to follow (even for me), I should learn to code more clearly.
+
+### 4.First Review:
+
+Left and right lane angles narrowed down using np.arctan() so that only the lines which are between 20-60 degrees accepted. This helped crossing the bridge part. 
+Introduced last_working_right_line and last_working_left_line variables which holds the data of the last known location of the lanes so that if we cannot draw any line because of missing points, we go back and collect the last working points. By this way (checking by math.isnan) we increased quality and stability of the lines. 
+
+Variables changed:
+rho=2
+threshold increased to 50 
+min_line_length=20
+max_line_gap=100
+
+as advised.
+
+Fix:
+
+Removed ROI mask from video.
+
+TODO:
+
+Fix lane lengths: When I increase 0.6 to 0.7c(or more) (mask_y_height=int(img_shp[0]*0.6)) I got an error. Seems like I am not able to find any points when mask is increased. I may be able to fix this if I find a way to cut lines according to ROI.
